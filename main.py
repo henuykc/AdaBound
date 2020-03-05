@@ -11,6 +11,7 @@ import argparse
 
 from demos.cifar10.models import *
 from adabound import AdaBound
+from adabound import NesterovAdaBound
 
 
 def get_parser():
@@ -112,7 +113,7 @@ def create_optimizer(args, model_params):
         return optim.Adam(model_params, args.lr, betas=(args.beta1, args.beta2),
                           weight_decay=args.weight_decay, amsgrad=True)
     elif args.optim == 'adabound':
-        return AdaBound(model_params, args.lr, betas=(args.beta1, args.beta2),
+        return NesterovAdaBound(model_params, args.lr, betas=(args.beta1, args.beta2),
                         final_lr=args.final_lr, gamma=args.gamma,
                         weight_decay=args.weight_decay)
     else:
@@ -198,8 +199,9 @@ def main():
     test_accuracies = []
 
     for epoch in range(start_epoch + 1, 200):
-        scheduler.step()#要与202行互换位置
+        #要与202行互换位置
         train_acc = train(net, epoch, device, train_loader, optimizer, criterion)
+        scheduler.step()
         test_acc = test(net, device, test_loader, criterion)
 
         # Save checkpoint.

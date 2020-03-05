@@ -92,6 +92,7 @@ class AdaBound(Optimizer):
 
                 # Decay the first and second moment running average coefficient
                 exp_avg.mul_(beta1).add_(1 - beta1, grad)
+                exp_avg.mul_(beta1).add_(1 - beta1, grad)
                 exp_avg_sq.mul_(beta2).addcmul_(1 - beta2, grad, grad)
                 if amsbound:
                     # Maintains the maximum of all 2nd moment running avg. till now
@@ -108,8 +109,10 @@ class AdaBound(Optimizer):
                 # Applies bounds on actual learning rate
                 # lr_scheduler cannot affect final_lr, this is a workaround to apply lr decay
                 final_lr = group['final_lr'] * group['lr'] / base_lr
-                lower_bound = final_lr * (1 - 1 / (group['gamma'] * state['step'] + 1))
-                upper_bound = final_lr * (1 + 1 / (group['gamma'] * state['step']))
+                lower_bound = final_lr
+                              # * (1 - 1 / (group['gamma'] * state['step'] + 1))
+                upper_bound = final_lr
+                              # * (1 + 1 / (group['gamma'] * state['step']))
                 step_size = torch.full_like(denom, step_size)
                 step_size.div_(denom).clamp_(lower_bound, upper_bound).mul_(exp_avg)
 
@@ -137,7 +140,7 @@ class AdaBoundW(Optimizer):
     """
 
     def __init__(self, params, lr=1e-3, betas=(0.9, 0.999), final_lr=0.1, gamma=1e-3,
-                 eps=1e-8, weight_decay=0, amsbound=False):
+                 eps=1e-8, weight_decay=0.000001, amsbound=False):
         if not 0.0 <= lr:
             raise ValueError("Invalid learning rate: {}".format(lr))
         if not 0.0 <= eps:
@@ -175,7 +178,7 @@ class AdaBoundW(Optimizer):
             for p in group['params']:
                 if p.grad is None:
                     continue
-                grad = p.grad.data
+                grad = p.grad.data+group['weight_decay']*p.data
                 if grad.is_sparse:
                     raise RuntimeError(
                         'Adam does not support sparse gradients, please consider SparseAdam instead')

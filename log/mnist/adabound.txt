@@ -1,0 +1,303 @@
+D:\PythonProject\Scripts\python.exe C:/Users/Ykc/PycharmProjects/AdaBound/demos/mnist.py
+epoch:  0
+train acc 87.373
+ test acc 92.300
+epoch:  1
+train acc 92.713
+ test acc 93.980
+epoch:  2
+train acc 94.028
+ test acc 94.590
+epoch:  3
+train acc 94.840
+ test acc 94.900
+epoch:  4
+train acc 95.350
+ test acc 95.560
+epoch:  5
+train acc 95.787
+ test acc 95.650
+epoch:  6
+train acc 96.063
+ test acc 96.120
+epoch:  7
+train acc 96.392
+ test acc 96.180
+epoch:  8
+train acc 96.688
+ test acc 96.420
+epoch:  9
+train acc 96.850
+ test acc 96.460
+epoch:  10
+train acc 97.060
+ test acc 96.630
+epoch:  11
+train acc 97.172
+ test acc 96.760
+epoch:  12
+train acc 97.307
+ test acc 96.820
+epoch:  13
+train acc 97.403
+ test acc 96.870
+epoch:  14
+train acc 97.565
+ test acc 96.910
+epoch:  15
+train acc 97.678
+ test acc 96.900
+epoch:  16
+train acc 97.695
+ test acc 96.970
+epoch:  17
+train acc 97.802
+ test acc 97.070
+epoch:  18
+train acc 97.932
+ test acc 97.120
+epoch:  19
+train acc 97.960
+ test acc 97.100
+epoch:  20
+train acc 98.062
+ test acc 96.950
+epoch:  21
+train acc 98.103
+ test acc 97.290
+epoch:  22
+train acc 98.198
+ test acc 97.200
+epoch:  23
+train acc 98.252
+ test acc 97.010
+epoch:  24
+train acc 98.267
+ test acc 97.140
+epoch:  25
+train acc 98.380
+ test acc 97.250
+epoch:  26
+train acc 98.378
+ test acc 97.230
+epoch:  27
+train acc 98.502
+ test acc 97.410
+epoch:  28
+train acc 98.537
+ test acc 97.330
+epoch:  29
+train acc 98.595
+ test acc 97.410
+epoch:  30
+train acc 98.618
+ test acc 97.230
+epoch:  31
+train acc 98.667
+ test acc 97.110
+epoch:  32
+train acc 98.683
+ test acc 97.290
+epoch:  33
+train acc 98.745
+ test acc 97.260
+epoch:  34
+train acc 98.767
+ test acc 97.290
+epoch:  35
+train acc 98.837
+ test acc 97.450
+epoch:  36
+train acc 98.898
+ test acc 97.230
+epoch:  37
+train acc 98.962
+ test acc 97.390
+epoch:  38
+train acc 98.938
+ test acc 97.400
+epoch:  39
+train acc 99.018
+ test acc 97.420
+epoch:  40
+train acc 99.070
+ test acc 97.120
+epoch:  41
+train acc 99.040
+ test acc 97.280
+epoch:  42
+train acc 99.082
+ test acc 97.440
+epoch:  43
+train acc 99.162
+ test acc 97.220
+epoch:  44
+train acc 99.185
+ test acc 97.410
+epoch:  45
+train acc 99.228
+ test acc 97.440
+epoch:  46
+train acc 99.253
+ test acc 97.460
+epoch:  47
+train acc 99.270
+ test acc 97.150
+epoch:  48
+train acc 99.247
+ test acc 97.510
+epoch:  49
+train acc 99.348
+ test acc 97.530
+epoch:  50
+train acc 99.315
+ test acc 97.410
+epoch:  51
+train acc 99.355
+ test acc 97.390
+epoch:  52
+train acc 99.377
+ test acc 97.260
+epoch:  53
+train acc 99.432
+ test acc 97.340
+epoch:  54
+train acc 99.482
+ test acc 97.410
+epoch:  55
+train acc 99.460
+ test acc 97.380
+epoch:  56
+train acc 99.513
+ test acc 97.390
+epoch:  57
+train acc 99.512
+ test acc 97.480
+epoch:  58
+train acc 99.555
+ test acc 97.380
+epoch:  59
+train acc 99.590
+ test acc 97.390
+epoch:  60
+train acc 99.578
+ test acc 97.400
+epoch:  61
+train acc 99.617
+ test acc 97.200
+epoch:  62
+train acc 99.667
+ test acc 97.330
+epoch:  63
+train acc 99.648
+ test acc 97.370
+epoch:  64
+train acc 99.680
+ test acc 97.360
+epoch:  65
+train acc 99.700
+ test acc 97.390
+epoch:  66
+train acc 99.695
+ test acc 97.270
+epoch:  67
+train acc 99.737
+ test acc 97.410
+epoch:  68
+train acc 99.753
+ test acc 97.380
+epoch:  69
+train acc 99.737
+ test acc 97.440
+epoch:  70
+train acc 99.755
+ test acc 97.430
+epoch:  71
+train acc 99.752
+ test acc 97.460
+epoch:  72
+train acc 99.792
+ test acc 97.390
+epoch:  73
+train acc 99.787
+ test acc 97.350
+epoch:  74
+train acc 99.795
+ test acc 97.430
+epoch:  75
+train acc 99.827
+ test acc 97.330
+epoch:  76
+train acc 99.830
+ test acc 97.380
+epoch:  77
+train acc 99.833
+ test acc 97.490
+epoch:  78
+train acc 99.847
+ test acc 97.350
+epoch:  79
+train acc 99.843
+ test acc 97.400
+epoch:  80
+train acc 99.875
+ test acc 97.410
+epoch:  81
+train acc 99.872
+ test acc 97.390
+epoch:  82
+train acc 99.873
+ test acc 97.390
+epoch:  83
+train acc 99.888
+ test acc 97.460
+epoch:  84
+train acc 99.888
+ test acc 97.440
+epoch:  85
+train acc 99.873
+ test acc 97.270
+epoch:  86
+train acc 99.892
+ test acc 97.310
+epoch:  87
+train acc 99.898
+ test acc 97.410
+epoch:  88
+train acc 99.908
+ test acc 97.380
+epoch:  89
+train acc 99.907
+ test acc 97.430
+epoch:  90
+train acc 99.923
+ test acc 97.330
+epoch:  91
+train acc 99.922
+ test acc 97.410
+epoch:  92
+train acc 99.928
+ test acc 97.200
+epoch:  93
+train acc 99.928
+ test acc 97.260
+epoch:  94
+train acc 99.935
+ test acc 97.350
+epoch:  95
+train acc 99.943
+ test acc 97.270
+epoch:  96
+train acc 99.933
+ test acc 97.350
+epoch:  97
+train acc 99.937
+ test acc 97.370
+epoch:  98
+train acc 99.960
+ test acc 97.250
+epoch:  99
+train acc 99.943
+ test acc 97.280
+
+Process finished with exit code 0

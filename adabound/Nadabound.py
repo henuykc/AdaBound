@@ -1,5 +1,6 @@
 import math
 import torch
+import numpy as np
 from torch.optim import Optimizer
 
 
@@ -22,7 +23,7 @@ class NesterovAdaBound(Optimizer):
         https://openreview.net/forum?id=Bkg3g2R9FX
     """
 
-    def __init__(self, params, lr=1e-3, betas=(0.9, 0.999), final_lr=0.1, gamma=1e-3,
+    def __init__(self, params, lr=1e-3, betas=(0.99, 0.999), final_lr=0.1, gamma=1e-3,
                  eps=1e-8, weight_decay=0, amsbound=False):
         if not 0.0 <= lr:
             raise ValueError("Invalid learning rate: {}".format(lr))
@@ -50,7 +51,7 @@ class NesterovAdaBound(Optimizer):
     def moment_correction(self,step):
         sum=1
         for i in range(step):
-            sum*=(1.-0.5*math.pow(0.96,(step+1)/250))
+            sum*=(1.-0.5*math.pow(0.96,(i+1)/250))
         return sum
 
     def step(self, closure=None):
@@ -122,7 +123,8 @@ class NesterovAdaBound(Optimizer):
 
                 bias_correction1 = 1 - beta1 ** state['step']
                 bias_correction2 = v_bias_correction
-                step_size = group['lr'] * math.sqrt(bias_correction2) / bias_correction1
+                step_size = group['lr']
+                            # * math.sqrt(bias_correction2) / bias_correction1
 
                 # Applies bounds on actual learning rate
                 # lr_scheduler cannot affect final_lr, this is a workaround to apply lr decay
@@ -156,7 +158,7 @@ class AdaBoundW(Optimizer):
     """
 
     def __init__(self, params, lr=1e-3, betas=(0.9, 0.999), final_lr=0.1, gamma=1e-3,
-                 eps=1e-8, weight_decay=0, amsbound=False):
+                 eps=1e-8, weight_decay=0, eta=0.01,amsbound=False):
         if not 0.0 <= lr:
             raise ValueError("Invalid learning rate: {}".format(lr))
         if not 0.0 <= eps:
@@ -170,7 +172,7 @@ class AdaBoundW(Optimizer):
         if not 0.0 <= gamma < 1.0:
             raise ValueError("Invalid gamma parameter: {}".format(gamma))
         defaults = dict(lr=lr, betas=betas, final_lr=final_lr, gamma=gamma, eps=eps,
-                        weight_decay=weight_decay, amsbound=amsbound)
+                        weight_decay=weight_decay, eta=eta,amsbound=amsbound)
         super(AdaBoundW, self).__init__(params, defaults)
 
         self.base_lrs = list(map(lambda group: group['lr'], self.param_groups))
@@ -194,6 +196,7 @@ class AdaBoundW(Optimizer):
             for p in group['params']:
                 if p.grad is None:
                     continue
+
                 grad = p.grad.data
                 if grad.is_sparse:
                     raise RuntimeError(
@@ -212,7 +215,10 @@ class AdaBoundW(Optimizer):
                     if amsbound:
                         # Maintains max of all exp. moving avg. of sq. grad. values
                         state['max_exp_avg_sq'] = torch.zeros_like(p.data)
-
+                size=list(grad.size())
+                noise=np.random.normal(0,math.sqrt(group['eta'])/math.pow(1+state['step'],0.55),size)
+                noise=torch.tensor(noise,dtype=torch.float32)
+                grad=grad+noise
                 exp_avg, exp_avg_sq = state['exp_avg'], state['exp_avg_sq']
                 if amsbound:
                     max_exp_avg_sq = state['max_exp_avg_sq']
@@ -222,7 +228,9 @@ class AdaBoundW(Optimizer):
 
                 # Decay the first and second moment running average coefficient
                 exp_avg.mul_(beta1).add_(1 - beta1, grad)
-                exp_avg_sq.mul_(beta2).addcmul_(1 - beta2, grad, grad)
+                exp_avg_sq\
+                    .mul_(beta2)\
+                    .addcmul_(1 - beta2, grad, grad)
                 if amsbound:
                     # Maintains the maximum of all 2nd moment running avg. till now
                     torch.max(max_exp_avg_sq, exp_avg_sq, out=max_exp_avg_sq)
